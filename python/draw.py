@@ -243,6 +243,10 @@ def 出图(动作, 数量, 边长, 输出目录, 压暗, 台词, 种子=None, �
     设备 = "cuda" if torch.cuda.is_available() else "cpu"
     类型 = torch.float16 if 设备 == "cuda" else torch.float32
 
+    if not (lora and os.path.exists(lora)):
+        print("警告：没找到大肥鱼 LoRA（%s）" % (lora or "未配置"), flush=True)
+        print("      插件能出图，但画出来的不是大肥鱼。去 Releases 下载 "
+              "dafeiyu_v17.safetensors 放进 models/ 就好。", flush=True)
     print("台词：%r" % (台词 or ""), flush=True)
     if not (台词 or "").strip():
         print("注意：没传台词，这张图上不会有字", flush=True)

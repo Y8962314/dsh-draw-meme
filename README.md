@@ -18,7 +18,8 @@ dsh plugin --profile <你的 profile 名> add <本目录的绝对路径>
 
 ### 方式二：手动装（没有 CLI 也能装）
 
-1. 把**整个目录**（含 `models/`，里面有 170M 的 LoRA，别漏）复制到
+1. 把**整个目录**复制到（`models/` 里没有权重，LoRA 要另外下载，见下面「怎么装这个 LoRA」）
+   目标是（把 <profile 名> 换成你自己的）：
    `~/.dsh/profiles/<profile 名>/node_modules/dsh-draw-meme/`
 2. 打开同级的 `package.json`，加两处：
 
@@ -75,11 +76,51 @@ git add models/dafeiyu_v17.safetensors
 **2. 放 Release 附件（仓库里不带权重）**
 
 `.gitignore` 默认已经忽略 `models/*.safetensors`。把 LoRA 传成 Release 资产，
-装机的人下载后放进 `models/` 就行 —— 少了它插件照样能跑，只是出来的不是大肥鱼。
+装机的人下载 → 解压 → 放进 `models/`（步骤见上面「怎么装这个 LoRA」）。少了它插件照样能跑，只是画出来的不是大肥鱼。
 
 `.gitignore` 已经排掉：`out/`、`tmp/`、`torchinductor_*/`、`__pycache__/`、`*.bak*`。
 
 ---
+
+## 没有 LoRA 会怎样
+
+**插件照样能跑，但画出来的不是大肥鱼。**
+
+LoRA（`dafeiyu_v17.safetensors`，163M）没跟仓库走——GitHub 单文件超过 100M 直接拒收。
+所以：**从 Releases 页面下载它，放进插件的 `models/` 目录**，才画得出大肥鱼。
+
+没放的话：能出图，但画的是普通角色，提示里会有一行警告：
+
+```
+警告：没找到大肥鱼 LoRA（...models/dafeiyu_v17.safetensors）
+      插件能出图，但画出来的不是大肥鱼。去 Releases 下载 dafeiyu_v17.safetensors 放进 models/ 就好。
+```
+
+---
+
+### 怎么装这个 LoRA（必看）
+
+1. 打开仓库的 **Releases** 页面（右边栏）
+2. 下载 `dafeiyu_v17.zip`（162M）
+3. **解压**，里面是 `dafeiyu_v17.safetensors`
+4. 把它放进插件的 `models\` 目录，最终路径长这样：
+
+```
+...
+ode_modules\dsh-draw-meme\models\dafeiyu_v17.safetensors
+```
+
+5. 重启 DSH（或等 12 分钟让常驻进程自己退掉）
+
+**文件名必须一字不差**是 `dafeiyu_v17.safetensors`，改了名插件就找不到。
+
+放好之后再画一张，日志里应该出现：
+
+```
+loading LoRA dafeiyu_v17.safetensors ...
+```
+
+没有这一行、反而出现「警告：没找到大肥鱼 LoRA」，就是路径放错了。
 
 ## 为什么提示词要拆三段
 
