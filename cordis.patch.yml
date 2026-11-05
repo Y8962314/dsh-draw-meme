@@ -1,0 +1,5 @@
+# DSH「出图表情包」
+# id 同时是配置命名空间和日志前缀
+- insert:
+    - id: draw-meme
+      name: 'dsh-draw-meme'
