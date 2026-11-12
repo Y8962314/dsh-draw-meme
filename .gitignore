@@ -9,8 +9,11 @@ __pycache__/
 *.bak
 *.bak-*
 
-# 模型权重太大（163M，超过 GitHub 单文件 100M 限制）
-# 走 Release 附件或 Git LFS，别直接提交
+# 大文件走 Git LFS 或 Release 附件，别直接提交（GitHub 单文件硬限制 100M）
+#   models/dafeiyu_v24.safetensors  456M  -> Release 附件 / LFS
+#   comfy_kit/                      195M（824 个文件，含一个 128M 的 hip 后端）
+# comfy_kit 是运行时必需（插件靠它不用装外部 ComfyUI），发布方式待定：
+#   走 LFS、或拆成 Release 的压缩包让用户解压，两者都行，看仓库策略。
 models/*.safetensors
 
 # 编辑器 / 系统
@@ -18,3 +21,7 @@ models/*.safetensors
 Thumbs.db
 .idea/
 .vscode/
+
+# 大件不进仓库（和代码一起压进 Release 的一个 zip）
+comfy_kit/
+models/

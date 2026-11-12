@@ -40,6 +40,10 @@ def 回(obj):
 
 
 def 处理(请求):
+    # 2026-11-12：步数从请求里来（插件设置页可调，默认 15）。出图() 每次读这个环境变量，
+    # 所以同一进程里改它立刻生效，不用重启 worker。
+    if 请求.get("steps"):
+        os.environ["DSH_DRAW_STEPS"] = str(int(请求["steps"]))
     buf = io.StringIO()
     with contextlib.redirect_stdout(buf):
         rc = draw.出图(

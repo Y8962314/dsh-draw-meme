@@ -45,6 +45,30 @@ window.__ModuleLoader__.load({
       )
     }
 
+    function 勾选框(标签, 打勾, 改, 说明, 禁用) {
+      return h('div', { style: { ...样式.行, opacity: 禁用 ? 0.55 : 1 } },
+        h('label', { style: { display: 'flex', alignItems: 'center', gap: 8, cursor: 禁用 ? 'not-allowed' : 'pointer' } },
+          h('input', {
+            type: 'checkbox', checked: !!打勾, disabled: !!禁用,
+            onChange: (e) => 改(e.target.checked),
+          }),
+          h('span', { style: { fontSize: 13 } }, 标签),
+        ),
+        说明 ? h('span', { style: 样式.提示 }, 说明) : null,
+      )
+    }
+
+    function 下拉(标签, 值, 选项, 改, 说明) {
+      return h('div', { style: 样式.行 },
+        h('span', { style: 样式.标签 }, 标签),
+        h('select', {
+          style: 样式.输入, value: 值,
+          onChange: (e) => 改(e.target.value),
+        }, ...选项.map(([v, t]) => h('option', { key: v, value: v }, t))),
+        说明 ? h('span', { style: 样式.提示 }, 说明) : null,
+      )
+    }
+
     function 面板() {
       const [配置, 设置配置] = React.useState(null)
       const [状态, 设置状态] = React.useState('')
@@ -64,6 +88,12 @@ window.__ModuleLoader__.load({
               seed: c.seed === null || c.seed === undefined ? '' : String(c.seed),
               文件: d.file || '',
               内置LoRA: !!d.loraPacked,
+              低显存: !!c.低显存,
+              要字: c.要字 === undefined ? !c.noText : !!c.要字,
+              字体: c.字体 || 'auto',
+              字号: String(c.字号 || 1),
+              字重: String(c.字重 || 1),
+              步数: String(c.步数 || 20),
             })
           })
           .catch((e) => 设置状态('读配置失败：' + e.message))
@@ -85,6 +115,12 @@ window.__ModuleLoader__.load({
             size: Number(配置.size) || 832,
             dim: Number(配置.dim) || 0.96,
             seed: 配置.seed === '' ? null : Number(配置.seed),
+            低显存: !!配置.低显存,
+            要字: !!配置.要字,
+            字体: 配置.字体,
+            字号: Number(配置.字号) || 1,
+            字重: Number(配置.字重) || 1,
+            步数: Number(配置.步数) || 20,
           }
           const r = await fetch('/dsh-draw-meme-api', {
             method: 'POST',
@@ -104,11 +140,35 @@ window.__ModuleLoader__.load({
 
         格子('Python 解释器（留空自动找）', 配置.python, 改('python'), 'C:/Python312/python.exe'),
         格子('底模（本地 .safetensors 或 HF 仓库名，留空自动下）', 配置.base, 改('base'), 'cagliostrolab/animagine-xl-4.0'),
-        格子('LoRA（留空用内置的大肥鱼 v17）', 配置.lora, 改('lora'),
-          配置.内置LoRA ? '已内置 models/dafeiyu_v17.safetensors' : '没找到内置 LoRA'),
-        格子('出图边长（512 / 768 / 832 / 1024）', 配置.size, 改('size'), '832'),
+        格子('LoRA（留空用内置的大肥鱼 v24）', 配置.lora, 改('lora'),
+          配置.内置LoRA ? '已内置 models/dafeiyu_v24.safetensors' : '没找到内置 LoRA'),
+        下拉('出图边长', String(配置.size), [
+          ['512', '512（快，1.17 秒；细节糊，构图偏最多）'],
+          ['768', '768（2.35 秒；接近 832）'],
+          ['832', '832（推荐，2.72 秒；唯一不用缩放底图，最稳）'],
+          ['1024', '1024（最细，3.89 秒；慢 43%）'],
+        ], 改('size'), '非 832 会把底图缩放过去，构图会略飘'),
+        格子('采样总步数（默认 20；底图已跑 2 步，实际采样 = 总步数-2）', 配置.步数, 改('步数'),
+          '20 = 2.66 秒/张；15 步 2.07 秒；28 步 3.9 秒；10 步以下会糊'),
         格子('整体压暗（0.96 = 定稿值，1 不压）', 配置.dim, 改('dim'), '0.96'),
         格子('固定种子（留空每次随机；填 51001 可复现验收那批）', 配置.seed, 改('seed'), '留空'),
+
+        h('span', { style: { ...样式.标签, marginTop: 6 } }, '图上的字'),
+        勾选框('在图上写台词', 配置.要字, 改('要字'), '关掉就只出图，字你自己后期加。'),
+        下拉('字体', 配置.字体, [
+          ['auto', '默认（微软雅黑粗体）'],
+          ['行楷', '行楷（夸张、适合兴奋/震惊）'],
+          ['楷体', '楷体（软、适合委屈/害羞）'],
+          ['黑体', '黑体（硬、适合生气/得意）'],
+          ['雅黑', '雅黑粗体'],
+        ], 改('字体'), '也可以直接把 .ttf/.ttc 的完整路径填在下面。'),
+        格子('字体文件路径（留空用上面选的）', /[\/]/.test(配置.字体) ? 配置.字体 : '', (v) => 设置配置({ ...配置, 字体: v || 'auto' }), 'D:/字体/某某.ttf'),
+        格子('字号（1 = 原样，1.5 = 更大）', 配置.字号, 改('字号'), '1'),
+        格子('字重（1 = 原样，2 = 描边更粗）', 配置.字重, 改('字重'), '1'),
+
+        勾选框('低显存档（显存峰值约 0.95G，慢 2.3 倍）', 配置.低显存, 改('低显存'),
+          '勾上之后走 comfy 自带的低显存档：峰值显存从 7.5G 降到 0.95G，画质几乎不变'
+            + '（同一个底图同一个种子实测差 0.36%），代价是每张从 3.3 秒变成 7.7 秒。'),
 
         h('button', { style: 样式.按钮, onClick: 保存 }, '保存'),
         h('span', { style: 样式.提示 }, '配置文件：' + (配置.文件 || '~/.dsh/draw-meme.json')),

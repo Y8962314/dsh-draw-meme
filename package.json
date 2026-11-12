@@ -1,11 +1,17 @@
 {
   "name": "dsh-draw-meme",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "displayName": "表情包绘制",
   "description": "表情包绘制（dsh-draw-meme）：装完就能让大肥鱼自己画表情包。一句话出图、自动压暗加字、进表情库，不需要 ComfyUI。",
   "license": "MIT",
   "type": "module",
-  "keywords": ["deepseek-harness", "dsh-plugin", "image", "meme", "sdxl"],
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin",
+    "image",
+    "meme",
+    "sdxl"
+  ],
   "main": "lib/host.js",
   "exports": {
     ".": "./lib/host.js",
@@ -13,9 +19,21 @@
     "./cordis.patch.yml": "./cordis.patch.yml",
     "./package.json": "./package.json"
   },
-  "files": ["lib", "python", "models", "docs", "client.js", "cordis.patch.yml", "README.md", "CHANGELOG.md", "LICENSE"],
+  "files": [
+    "lib",
+    "python",
+    "models",
+    "docs",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
   "dsh": {
-    "bundle": { "patch": "./cordis.patch.yml" },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
     "client": {
       "inject": [
         "@deepseek-ai/dsh-client-runtime",
@@ -25,5 +43,7 @@
       "platform": "web"
     }
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  }
 }
