@@ -1,6 +1,6 @@
 {
   "name": "dsh-draw-meme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "表情包绘制",
   "description": "表情包绘制（dsh-draw-meme）：装完就能让大肥鱼自己画表情包。一句话出图、自动压暗加字、进表情库，不需要 ComfyUI。",
   "license": "MIT",
