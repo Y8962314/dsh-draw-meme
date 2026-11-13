@@ -109,6 +109,67 @@ for _d in [
     "鼓掌":  "clapping hands happily, (open mouth smile:1.2), sparkling eyes",
     "捂脸":  "one hand covering face, embarrassed, (deep blush:1.3)",
     "思考":  "thinking, (one hand on chin:1.3), looking up, serious",
+    # 2026-11-13 14:40 扩表：同种子测试发现 72 个词里只命中 13 个，其余中文直接进 prompt
+    # 被 SDXL 忽略，导致表情全一样。这里把没覆盖的补上，写法统一成「嘴/眼/眉/手/脸红/汗」。
+    "害怕":  "terrified, (eyes wide open:1.4), (trembling:1.3), (sweat drops:1.2), hands covering face",
+    "嫌弃":  "disgusted, (half-closed eyes:1.3), (raised eyebrow:1.2), (pouting:1.2), looking away",
+    "期待":  "expectant, (sparkling eyes:1.4), (hands clasped:1.2), leaning forward, slight smile",
+    "失望":  "disappointed, (drooping eyes:1.3), (frowning:1.2), head lowered, sigh",
+    "释然":  "relieved, (gentle smile:1.2), eyes closed softly, relaxed shoulders",
+    "摆烂":  "dead inside, (blank expression:1.4), (half-closed eyes:1.2), slouched posture, lying on floor",
+    "破防":  "emotionally broken, (teary eyes:1.4), (trembling lips:1.3), hand over chest",
+    "真香":  "smug satisfaction, (grinning:1.3), (licking lips:1.2), holding food, sparkle",
+    "心虚":  "guilty, (looking away:1.3), (nervous sweat:1.2), (awkward smile:1.2), hands behind back",
+    "尴尬":  "awkward, (forced smile:1.3), (sweat drop:1.2), (looking sideways:1.2), scratching head",
+    "嫉妒":  "jealous, (sideways glance:1.3), (pouting:1.2), arms crossed, sour face",
+    "心疼":  "worried, (frowning:1.3), (teary eyes:1.2), hands on chest, concerned",
+    "感动":  "touched, (teary eyes:1.4), (covering mouth:1.2), (blush:1.2), soft smile",
+    "纠结":  "troubled, (furrowed brows:1.3), (biting lip:1.2), (crossed arms:1.2), sweat drop",
+    "怀疑":  "suspicious, (narrowed eyes:1.3), (raised eyebrow:1.3), (hand on chin:1.2), question mark",
+    "恍然大悟":  "realization, (eyes wide open:1.4), (mouth open:1.2), (finger raised:1.3), lightbulb",
+    "幸灾乐祸":  "mischievous grin, (smug:1.3), (narrowed eyes:1.2), (hand over mouth:1.2), laughing",
+    "不情愿":  "reluctant, (pouting:1.3), (looking away:1.2), (frown:1.2), dragging feet",
+    "破罐破摔":  "given up, (dead eyes:1.4), (blank expression:1.3), sprawled posture, sigh",
+    "打招呼":  "waving, (smile:1.2), (one hand raised:1.3), (open mouth:1.1), friendly",
+    "告别":  "farewell, (waving:1.2), (sad smile:1.2), (teary eyes:1.1), looking back",
+    "道歉":  "apologizing, (bowing head:1.3), (closed eyes:1.2), (frown:1.2), (sweat drop:1.1)",
+    "道谢":  "grateful, (smile:1.2), (hand on chest:1.2), (blush:1.1), bowing slightly",
+    "请求":  "pleading, (puppy eyes:1.4), (hands clasped:1.3), (pouting:1.1), leaning forward",
+    "拒绝":  "refusing, (turned away:1.3), (frown:1.2), (arms crossed:1.2), closed eyes",
+    "安慰":  "comforting, (gentle smile:1.2), (holding hands:1.2), soft eyes",
+    "吐槽":  "complaining, (half-closed eyes:1.3), (raised eyebrow:1.2), (hand raised:1.2), smirk",
+    "附和":  "agreeing, (nodding:1.2), (smile:1.1), (thumbs up:1.2), cheerful",
+    "挑衅":  "provoking, (smirk:1.4), (narrowed eyes:1.2), (beckoning:1.2), tilted head",
+    "示好":  "friendly, (gentle smile:1.2), (offering something:1.3), (blush:1.1), sparkling eyes",
+    "装乖":  "acting cute, (innocent smile:1.3), (sparkling eyes:1.2), (hands together:1.2), tilted head",
+    "饿":  "hungry, (drooling:1.3), (hands on stomach:1.2), (starving eyes:1.2), staring at food",
+    "饱":  "full, (hands on belly:1.3), (satisfied:1.2), (bloated:1.2), half-closed eyes",
+    "渴":  "thirsty, (tongue out:1.2), (dry lips:1.2), (looking at drink:1.2), exhausted",
+    "累":  "exhausted, (droopy eyes:1.3), (sigh:1.2), (slouching:1.3), (sweat drop:1.1)",
+    "冷":  "freezing, (shivering:1.4), (hugging self:1.3), (chattering teeth:1.2), blue lips",
+    "热":  "hot, (sweating:1.4), (fanning face:1.3), (loosening collar:1.2), (red face:1.1)",
+    "疼":  "in pain, (teary eyes:1.3), (gritted teeth:1.3), (holding arm:1.2)",
+    "晕":  "dizzy, (spiral eyes:1.4), (wobbling:1.3), (hand on head:1.2), (swirls above head:1.1)",
+    "流口水":  "drooling, (drool from mouth:1.5), (dazed:1.2), (glossy eyes:1.1), hungry look",
+    "打哈欠":  "yawning, (mouth wide open:1.4), (eyes closed:1.3), (hand covering mouth:1.3), (stretching:1.2)",
+    "撑得走不动":  "overstuffed, (holding big belly:1.4), (sprawled:1.3), (bloated:1.2), half-closed eyes",
+    "吃":  "eating, (holding food:1.3), (open mouth:1.2), (chewing:1.2), happy eyes",
+    "喝":  "drinking, (holding cup:1.3), (head tilted back:1.2), (closed eyes:1.1)",
+    "跑":  "running, (dynamic pose:1.3), (arms swinging:1.2), (legs apart:1.2), open mouth",
+    "跳":  "jumping, (airborne:1.4), (arms up:1.3), (legs bent:1.2), open mouth",
+    "睡":  "sleeping, (eyes closed:1.4), (zzz:1.3), (lying down:1.2), hands under head",
+    "摔":  "falling, (sprawled on ground:1.4), (dizzy:1.3), (sweat drop:1.2), open mouth",
+    "爬":  "crawling, (on all fours:1.4), (facing down:1.2), (exhausted:1.2), cat pose",
+    "伸手":  "reaching out, (one hand extended:1.4), (fingers spread:1.2), looking forward",
+    "绷不住了":  "barely holding it in, (trembling lips:1.3), (teary eyes:1.3), (covering mouth:1.2), (red face:1.1)",
+    "我裂开":  "cracking up, (broken expression:1.4), (teary:1.2), (holding head:1.2), dark aura",
+    "战术性喝水":  "tactical drink, (holding cup:1.3), (looking away:1.2), (calm:1.1), closed eyes",
+    "装死":  "playing dead, (lying on back:1.4), (x eyes:1.3), (tongue out:1.2), arms spread",
+    "溜了溜了":  "sneaking away, (running away:1.3), (looking back:1.2), (sweat drop:1.2), nervous smile",
+    "求放过":  "begging for mercy, (pleading eyes:1.4), (hands clasped:1.3), (teary:1.2), bowing",
+    "我不活了":  "dramatic despair, (hands on head:1.3), (screaming:1.2), (tears streaming:1.4), dramatic pose",
+    "太真实了":  "too real, (deadpan:1.3), (staring blankly:1.3), (nodding:1.2), tired eyes",
+    "给我整不会了":  "bewildered, (blank stare:1.4), (tilted head:1.2), (sweat drop:1.2), question mark",
 }
 
 构图 = "(upper body portrait, hands visible:1.3)"
@@ -227,7 +288,8 @@ _管道缓存 = {}
 def 收表情权重(文本, 上限=None):
     """把表情词里的权重压下来（2026-11-12 她要求：部分表情太夸张）。
 
-    默认上限 1.2；顺带清掉表情词表里混进去的 ":d" 之类脏字符（实测会拼成
+    默认上限 1.2（2026-11-13 试过 1.4：表情更明显，但 72 张里 8 张糊成一团、整体变淡，
+    所以退回 1.2）；顺带清掉表情词表里混进去的 ":d" 之类脏字符（实测会拼成
     "(:d mouth wide open:1.5)" 这种无效标签）。上限可用 DSH_DRAW_EXPR_CAP 改。
     """
     import re
@@ -481,8 +543,39 @@ def 出图(动作, 数量, 边长, 输出目录, 压暗, 台词, 种子=None, �
             路径 = os.path.join(输出目录, f"{戳}_{i+1}.png")
             图.save(路径)
             print("IMG:" + os.path.abspath(路径), flush=True)
+            # 顺手清一次老图（默认留 24 小时；她定的，单张图重画零成本）
+            try:
+                _保留 = int(os.environ.get("DSH_DRAW_KEEP_HOURS", "24"))
+            except ValueError:
+                _保留 = 24
+            if _保留 > 0:
+                清理旧图(输出目录, _保留)
             continue
     return 0
+
+
+def 清理旧图(目录, 保留小时=24):
+    """出完一张顺手清一次：删掉超过保留小时的老图，省盘。
+    2026-11-13 她定：每张都能重画，本地不用留。
+    想改保留时长：DSH_DRAW_KEEP_HOURS=48；想关掉：DSH_DRAW_KEEP_HOURS=-1。"""
+    try:
+        import time as _时间
+        截止 = _时间.time() - 保留小时 * 3600
+        删了 = 0
+        for 名 in os.listdir(目录):
+            if not 名.lower().endswith(".png"):
+                continue
+            路 = os.path.join(目录, 名)
+            try:
+                if os.path.getmtime(路) < 截止:
+                    os.remove(路)
+                    删了 += 1
+            except OSError:
+                continue
+        if 删了:
+            print("清理：删了 %d 张超过 %d 小时的旧图" % (删了, 保留小时), flush=True)
+    except Exception:
+        pass
 
 
 def 刷白背景(图, 阈值=42):
